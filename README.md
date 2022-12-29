@@ -23,7 +23,7 @@ apps](https://flutter.dev/docs/development/accessibility-and-localization/intern
 
 - https://twitter.com/biz84/status/1607634100784959488
 - https://github.com/transitive-bullshit/chatgpt-api
-- https://pub.dev/packages/text_to_speech
+- https://pub.dev/packages/flutter_tts
 - https://pub.dev/packages/speech_to_text
 - https://pub.dev/packages/avatar_glow
 - https://rxlabz.github.io/panache_web/#/editor
