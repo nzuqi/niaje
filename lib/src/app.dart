@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:niaje/src/home/home_view.dart';
+import 'package:niaje/themes/dark.dart';
+import 'package:niaje/themes/light.dart';
 
 import 'sample_feature/sample_item_details_view.dart';
-import 'sample_feature/sample_item_list_view.dart';
+// import 'sample_feature/sample_item_list_view.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
@@ -50,15 +53,16 @@ class MyApp extends StatelessWidget {
           //
           // The appTitle is defined in .arb files found in the localization
           // directory.
-          onGenerateTitle: (BuildContext context) =>
-              AppLocalizations.of(context)!.appTitle,
+          onGenerateTitle: (BuildContext context) => AppLocalizations.of(context)!.appTitle,
 
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-          theme: ThemeData(),
-          darkTheme: ThemeData.dark(),
+          theme: light,
+          darkTheme: dark,
           themeMode: settingsController.themeMode,
+
+          debugShowCheckedModeBanner: false,
 
           // Define a function to handle named routes in order to support
           // Flutter web url navigation and deep linking.
@@ -71,9 +75,11 @@ class MyApp extends StatelessWidget {
                     return SettingsView(controller: settingsController);
                   case SampleItemDetailsView.routeName:
                     return const SampleItemDetailsView();
-                  case SampleItemListView.routeName:
+                  // case SampleItemListView.routeName:
+                  //   return const SampleItemListView();
+                  case HomeView.routeName:
                   default:
-                    return const SampleItemListView();
+                    return const HomeView();
                 }
               },
             );

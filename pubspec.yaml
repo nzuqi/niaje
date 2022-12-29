@@ -16,6 +16,8 @@ dependencies:
     sdk: flutter
   text_to_speech: ^0.2.3
   speech_to_text: ^6.1.1
+  avatar_glow: ^2.0.2
+  logger: ^1.1.0
 
 dev_dependencies:
   flutter_test:
