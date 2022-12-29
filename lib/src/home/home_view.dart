@@ -13,11 +13,15 @@ class HomeView extends StatefulWidget {
 }
 
 class HomeViewState extends State<HomeView> {
-  String text = 'Press the mic & start speaking...';
+  final String defaultStr = 'Press the mic & start speaking...';
+  late String text;
+  late bool cleared;
   bool isListening = false;
 
   @override
   void initState() {
+    cleared = true;
+    text = defaultStr;
     super.initState();
   }
 
@@ -42,9 +46,36 @@ class HomeViewState extends State<HomeView> {
                 return Container(
                   margin: const EdgeInsets.all(8),
                   padding: const EdgeInsets.all(16),
-                  child: Text(
-                    text,
-                    style: const TextStyle(fontSize: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        text,
+                        style: const TextStyle(
+                          fontSize: 22.0,
+                        ),
+                      ),
+                      const SizedBox(height: 10.0),
+                      !isListening && !cleared
+                          ? InkWell(
+                              child: const Text(
+                                "Clear text",
+                                style: TextStyle(
+                                  color: Colors.transparent,
+                                  decoration: TextDecoration.underline,
+                                  decorationStyle: TextDecorationStyle.dotted,
+                                  decorationColor: Colors.red,
+                                  shadows: [Shadow(color: Colors.red, offset: Offset(0, -4))],
+                                ),
+                              ),
+                              onTap: () {
+                                text = defaultStr;
+                                cleared = true;
+                                setState(() {});
+                              },
+                            )
+                          : const SizedBox(),
+                    ],
                   ),
                 );
               },
@@ -66,18 +97,24 @@ class HomeViewState extends State<HomeView> {
     );
   }
 
-  Future toggleRecording() => SpeechApi.toggleRecording(
-        onResult: (text) => setState(() => this.text = text),
-        onListening: (isListening) {
-          logger.e(isListening);
-          setState(() => this.isListening = isListening);
+  Future toggleRecording() {
+    return SpeechApi.toggleRecording(
+      onResult: (text) {
+        this.text = text;
+        cleared = false;
+        setState(() {});
+      },
+      onListening: (isListening) {
+        this.isListening = isListening;
+        setState(() {});
 
-          if (!isListening) {
-            Future.delayed(const Duration(seconds: 1), () {
-              // Utils.scanText(text);
-              logger.i(text);
-            });
-          }
-        },
-      ).then((value) => logger.e(value));
+        if (!isListening) {
+          Future.delayed(const Duration(seconds: 1), () {
+            logger.i(text);
+            // Make request to ChatGPT here...
+          });
+        }
+      },
+    );
+  }
 }

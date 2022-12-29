@@ -30,7 +30,7 @@ class SliverCustomAppBar extends SliverPersistentHeaderDelegate {
                   Text(
                     "Niaje",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.white70,
                       fontWeight: FontWeight.bold,
                       fontSize: 22.0,
                     ),
@@ -49,12 +49,10 @@ class SliverCustomAppBar extends SliverPersistentHeaderDelegate {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.history, color: Colors.white),
-                    onPressed: () {
-                      // Navigator.restorablePushNamed(context, SettingsView.routeName);
-                    },
-                  ),
+                  // IconButton(
+                  //   icon: const Icon(Icons.history, color: Colors.white),
+                  //   onPressed: () {},
+                  // ),
                   IconButton(
                     icon: const Icon(Icons.settings, color: Colors.white),
                     onPressed: () {
