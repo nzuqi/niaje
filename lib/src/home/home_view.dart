@@ -13,7 +13,7 @@ class HomeView extends StatefulWidget {
 }
 
 class HomeViewState extends State<HomeView> {
-  String text = 'Press the mic & start speaking';
+  String text = 'Press the mic & start speaking...';
   bool isListening = false;
 
   @override
