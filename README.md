@@ -1,6 +1,6 @@
 # niaje
 
-Voice assistant app powered by ChatGPT
+Voice assistant app powered by OpenAI API
 
 ## Assets
 
