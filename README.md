@@ -2,6 +2,14 @@
 
 Voice assistant app powered by OpenAI API
 
+## run app in dev
+
+`flutter run`
+
+## build for prod
+
+`flutter build appbundle`
+
 ## Assets
 
 The `assets` directory houses images, fonts, and any other files you want to
