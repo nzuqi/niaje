@@ -37,7 +37,7 @@ class SliverCustomAppBar extends SliverPersistentHeaderDelegate {
                   ),
                   SizedBox(height: 6.0),
                   Text(
-                    "ChaGPT voice assistant",
+                    "AI assistant, powered by OpenAI API",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w200,

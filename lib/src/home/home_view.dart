@@ -1,7 +1,12 @@
+import 'dart:convert';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:http/http.dart';
 import 'package:niaje/api/speech_api.dart';
+import 'package:niaje/util/app_url.dart';
 import 'package:niaje/widgets/sliver_custom_app_bar.dart';
 import 'package:niaje/util/common.dart';
 import 'dart:io' show Platform;
@@ -18,12 +23,14 @@ class HomeView extends StatefulWidget {
 enum TtsState { playing, stopped, paused, continued }
 
 class HomeViewState extends State<HomeView> {
-  final String defaultStr = 'Press the mic & start speaking...';
+  final String defaultStr = 'Tap the mic & say something...';
   late String text;
   late bool cleared;
   bool isListening = false;
+  bool fetchingResponse = false;
+  String responseStr = '';
+  bool currentlyPlaying = false;
 
-  // TTS ============
   late FlutterTts flutterTts;
   String? language;
   String? engine;
@@ -84,7 +91,7 @@ class HomeViewState extends State<HomeView> {
                         ),
                       ),
                       const SizedBox(height: 10.0),
-                      !isListening && !cleared
+                      !isListening && !cleared && !fetchingResponse
                           ? InkWell(
                               child: const Text(
                                 "Clear text",
@@ -96,13 +103,53 @@ class HomeViewState extends State<HomeView> {
                                   shadows: [Shadow(color: Colors.red, offset: Offset(0, -4))],
                                 ),
                               ),
-                              onTap: () {
+                              onTap: () async {
+                                await _stop();
                                 text = defaultStr;
                                 cleared = true;
+                                responseStr = '';
                                 setState(() {});
                               },
                             )
                           : const SizedBox(),
+                      const SizedBox(height: 40.0),
+                      fetchingResponse
+                          ? SizedBox(
+                              width: double.infinity,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  SpinKitThreeBounce(
+                                    color: Colors.red,
+                                    size: 22,
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Opacity(
+                              opacity: 0.7,
+                              child: DefaultTextStyle(
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Theme.of(context).buttonTheme.colorScheme?.onSurface,
+                                ),
+                                child: responseStr.isNotEmpty
+                                    ? AnimatedTextKit(
+                                        isRepeatingAnimation: false,
+                                        displayFullTextOnTap: true,
+                                        animatedTexts: [
+                                          TypewriterAnimatedText(
+                                            responseStr,
+                                            speed: const Duration(milliseconds: 50),
+                                            cursor: ' _',
+                                          ),
+                                        ],
+                                      )
+                                    : const SizedBox(),
+                              ),
+                            ),
+                      const SizedBox(height: 120.0),
                     ],
                   ),
                 );
@@ -113,13 +160,16 @@ class HomeViewState extends State<HomeView> {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: AvatarGlow(
-        animate: isListening,
-        endRadius: 75,
-        glowColor: Theme.of(context).primaryColor,
-        child: FloatingActionButton(
-          onPressed: toggleRecording,
-          child: Icon(isListening ? Icons.mic : Icons.mic_none, size: 36),
+      floatingActionButton: Visibility(
+        visible: !fetchingResponse && !currentlyPlaying,
+        child: AvatarGlow(
+          animate: isListening,
+          endRadius: 75,
+          glowColor: Colors.red,
+          child: FloatingActionButton(
+            onPressed: toggleRecording,
+            child: Icon(isListening ? Icons.mic : Icons.mic_none, size: 36),
+          ),
         ),
       ),
     );
@@ -134,16 +184,20 @@ class HomeViewState extends State<HomeView> {
           setState(() {});
 
           if (!isListening) {
-            Future.delayed(const Duration(seconds: 1), () {
+            Future.delayed(const Duration(seconds: 1), () async {
               logger.i(text);
-              // Make request to ChatGPT here...
-              // Read out loud API response
-              _speak();
+              // Make request to ChatGPT here, and read out loud API response
+              await openAiSearch(text);
             });
           }
         },
         onListening: (isListening) {
           setState(() => this.isListening = isListening);
+          if (isListening) {
+            responseStr = '';
+            _stop();
+            setState(() {});
+          }
         },
       );
     } catch (e) {
@@ -153,6 +207,43 @@ class HomeViewState extends State<HomeView> {
       logger.e(e);
       rethrow;
     }
+  }
+
+  Future openAiSearch(String q) async {
+    fetchingResponse = true;
+    setState(() {});
+    final Map<String, dynamic> data = {"q": q};
+    var headers = await requestHeaders();
+    Response response = await post(
+      Uri.parse(AppUrl.search),
+      body: json.encode(data),
+      headers: headers,
+    );
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseData = json.decode(response.body);
+      if (responseData['status'] == 1) {
+        logger.v(responseData['data']);
+        responseStr = responseData['data'];
+        setState(() {});
+        _speak(msg: responseData['data']);
+      }
+    }
+    fetchingResponse = false;
+    setState(() {});
+  }
+
+  AnimatedTextKit aiText() {
+    List<TypewriterAnimatedText> texts = <TypewriterAnimatedText>[];
+    LineSplitter ls = const LineSplitter();
+    List<String> strs = ls.convert(responseStr);
+    for (String s in strs) {
+      texts.add(TypewriterAnimatedText(s, speed: const Duration(milliseconds: 50), cursor: ' _'));
+    }
+    return AnimatedTextKit(
+      isRepeatingAnimation: false,
+      displayFullTextOnTap: true,
+      animatedTexts: texts,
+    );
   }
 
   initTts() {
@@ -168,6 +259,7 @@ class HomeViewState extends State<HomeView> {
     flutterTts.setStartHandler(() {
       setState(() {
         logger.d("Playing");
+        currentlyPlaying = true;
         ttsState = TtsState.playing;
       });
     });
@@ -183,6 +275,7 @@ class HomeViewState extends State<HomeView> {
     flutterTts.setCompletionHandler(() {
       setState(() {
         logger.d("Complete");
+        currentlyPlaying = false;
         ttsState = TtsState.stopped;
       });
     });
@@ -190,6 +283,7 @@ class HomeViewState extends State<HomeView> {
     flutterTts.setCancelHandler(() {
       setState(() {
         logger.d("Cancel");
+        currentlyPlaying = false;
         ttsState = TtsState.stopped;
       });
     });
@@ -197,6 +291,7 @@ class HomeViewState extends State<HomeView> {
     flutterTts.setPauseHandler(() {
       setState(() {
         logger.d("Paused");
+        currentlyPlaying = false;
         ttsState = TtsState.paused;
       });
     });
@@ -204,6 +299,7 @@ class HomeViewState extends State<HomeView> {
     flutterTts.setContinueHandler(() {
       setState(() {
         logger.d("Continued");
+        currentlyPlaying = true;
         ttsState = TtsState.continued;
       });
     });
@@ -211,6 +307,7 @@ class HomeViewState extends State<HomeView> {
     flutterTts.setErrorHandler((msg) {
       setState(() {
         logger.d("error: $msg");
+        currentlyPlaying = false;
         ttsState = TtsState.stopped;
       });
     });
@@ -230,13 +327,15 @@ class HomeViewState extends State<HomeView> {
     }
   }
 
-  Future _speak() async {
+  Future _speak({String msg = ''}) async {
     await flutterTts.setVolume(volume);
     await flutterTts.setSpeechRate(rate);
     await flutterTts.setPitch(pitch);
 
-    if (text.isNotEmpty) {
-      await flutterTts.speak(text);
+    if (msg.isNotEmpty) {
+      currentlyPlaying = true;
+      setState(() {});
+      await flutterTts.speak(msg);
     }
   }
 
@@ -246,7 +345,11 @@ class HomeViewState extends State<HomeView> {
 
   Future _stop() async {
     var result = await flutterTts.stop();
-    if (result == 1) setState(() => ttsState = TtsState.stopped);
+    if (result == 1) {
+      ttsState = TtsState.stopped;
+      currentlyPlaying = false;
+      setState(() {});
+    }
   }
 
   Future _pause() async {

@@ -18,6 +18,9 @@ dependencies:
   speech_to_text: ^6.1.1
   avatar_glow: ^2.0.2
   logger: ^1.1.0
+  http: ^0.13.5
+  flutter_spinkit: ^5.1.0
+  animated_text_kit: ^4.2.2
 
 dev_dependencies:
   flutter_test:
@@ -32,5 +35,4 @@ flutter:
   generate: true
 
   assets:
-    # Add assets from the images directory to the application.
     - assets/images/

@@ -27,3 +27,5 @@ apps](https://flutter.dev/docs/development/accessibility-and-localization/intern
 - https://pub.dev/packages/speech_to_text
 - https://pub.dev/packages/avatar_glow
 - https://rxlabz.github.io/panache_web/#/editor
+- https://pub.dev/packages/flutter_spinkit
+- https://pub.dev/packages/animated_text_kit
