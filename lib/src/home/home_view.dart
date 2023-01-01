@@ -85,7 +85,7 @@ class HomeViewState extends State<HomeView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        text,
+                        text.toCapitalized(),
                         style: const TextStyle(
                           fontSize: 22.0,
                         ),
@@ -94,7 +94,7 @@ class HomeViewState extends State<HomeView> {
                       !isListening && !cleared && !fetchingResponse
                           ? InkWell(
                               child: const Text(
-                                "Clear text",
+                                "Clear \u2573",
                                 style: TextStyle(
                                   color: Colors.transparent,
                                   decoration: TextDecoration.underline,
@@ -352,6 +352,7 @@ class HomeViewState extends State<HomeView> {
     }
   }
 
+  // ignore: unused_element
   Future _pause() async {
     var result = await flutterTts.pause();
     if (result == 1) setState(() => ttsState = TtsState.paused);

@@ -37,7 +37,7 @@ class SliverCustomAppBar extends SliverPersistentHeaderDelegate {
                   ),
                   SizedBox(height: 6.0),
                   Text(
-                    "AI assistant, powered by OpenAI API",
+                    "Your AI voice assistant",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w200,
