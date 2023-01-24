@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:niaje/src/home/home_view.dart';
 import 'package:niaje/src/settings/settings_controller.dart';
 import 'package:niaje/util/common.dart';
 
@@ -88,7 +89,16 @@ class HistoryViewState extends State<HistoryView> {
                       ],
                     ),
                     onTap: () {
-                      logger.i(item);
+                      // logger.i(item);
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          settings: const RouteSettings(name: '/'),
+                          builder: (context) => HomeView(
+                            controller: widget.controller,
+                            query: item['query'],
+                          ),
+                        ),
+                      );
                     },
                   ),
                 );

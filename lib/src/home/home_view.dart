@@ -15,7 +15,8 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 
 class HomeView extends StatefulWidget {
   final SettingsController controller;
-  const HomeView({Key? key, required this.controller}) : super(key: key);
+  final String? query;
+  const HomeView({Key? key, required this.controller, this.query}) : super(key: key);
   static const routeName = '/';
 
   @override
@@ -53,11 +54,14 @@ class HomeViewState extends State<HomeView> {
   bool get isWindows => !kIsWeb && Platform.isWindows;
   bool get isWeb => kIsWeb;
 
+  bool skipHistory = false;
+
   @override
   void initState() {
     cleared = true;
     text = defaultStr;
     initTts();
+    handlePresets();
     super.initState();
   }
 
@@ -328,7 +332,11 @@ class HomeViewState extends State<HomeView> {
     if (appHistory.length > maxHistory) {
       appHistory.removeRange((maxHistory - 1), appHistory.length);
     }
-    await widget.controller.updateAppHistory(appHistory);
+    if (skipHistory == false) {
+      await widget.controller.updateAppHistory(appHistory);
+    }
+    skipHistory = false;
+    setState(() {});
   }
 
   Future _getDefaultEngine() async {
@@ -341,7 +349,7 @@ class HomeViewState extends State<HomeView> {
   Future _getDefaultVoice() async {
     var voice = await flutterTts.getDefaultVoice;
     if (voice != null) {
-      logger.d(voice);
+      // logger.d(voice);
     }
   }
 
@@ -374,5 +382,18 @@ class HomeViewState extends State<HomeView> {
   Future _pause() async {
     var result = await flutterTts.pause();
     if (result == 1) setState(() => ttsState = TtsState.paused);
+  }
+
+  handlePresets() async {
+    logger.i(widget.query);
+    if (widget.query != null) {
+      text = "${widget.query}";
+      cleared = false;
+      isListening = false;
+      skipHistory = true;
+      setState(() {});
+      _stop();
+      await openAiSearch(text);
+    }
   }
 }
