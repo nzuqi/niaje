@@ -113,7 +113,7 @@ class SettingsViewState extends State<SettingsView> {
                   Opacity(
                     opacity: 0.5,
                     child: Text(
-                      "Niaje v1.0.0",
+                      "Niaje v1.0.1",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 12.0,
