@@ -15,25 +15,27 @@ class SettingsService {
         : settings['appTheme'] == 'dark'
             ? ThemeMode.dark
             : ThemeMode.system);
-    // return ThemeMode.system;
+  }
+
+  /// Loads the User's history from local or remote storage.
+  Future<List<Map>> appHistory() async {
+    dynamic settings = await getSettings();
+    return settings['appHistory'];
   }
 
   Future<dynamic> getSettings() async {
     return await AppSettings().getAppSettings();
-    // if (settings['appTheme'] != null) {
-    //   widget.controller.updateThemeMode(settings['appTheme'] == 'light'
-    //       ? ThemeMode.light
-    //       : settings['appTheme'] == 'dark'
-    //           ? ThemeMode.dark
-    //           : ThemeMode.system);
-    //   setState(() {});
-    // }
   }
 
-  /// Persists the user's preferred ThemeMode to local or remote storage.
-  Future<void> updateThemeMode(ThemeMode theme) async {
-    // Use the shared_preferences package to persist settings locally or the
-    // http package to persist settings over the network.
-    await AppSettings().setAppSetting(theme.name);
+  Future<bool> updateThemeMode(ThemeMode theme) async {
+    return await AppSettings().setAppTheme(theme.name);
+  }
+
+  Future<bool> updateAppHistory(List<Map> history) async {
+    return await AppSettings().setAppHistory(history);
+  }
+
+  clearAppHistory() {
+    AppSettings().clearAppHistory();
   }
 }

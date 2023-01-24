@@ -6,6 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:http/http.dart';
 import 'package:niaje/api/speech_api.dart';
+import 'package:niaje/src/settings/settings_controller.dart';
 import 'package:niaje/util/app_url.dart';
 import 'package:niaje/widgets/sliver_custom_app_bar.dart';
 import 'package:niaje/util/common.dart';
@@ -13,7 +14,8 @@ import 'dart:io' show Platform;
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key: key);
+  final SettingsController controller;
+  const HomeView({Key? key, required this.controller}) : super(key: key);
   static const routeName = '/';
 
   @override
@@ -223,8 +225,9 @@ class HomeViewState extends State<HomeView> {
       final Map<String, dynamic> responseData = json.decode(response.body);
       if (responseData['status'] == 1) {
         logger.v(responseData['data']);
-        responseStr = responseData['data'];
+        responseStr = responseData['data'] ?? '';
         setState(() {});
+        await _appHistory(q.toCapitalized());
         _speak(msg: responseData['data']);
       }
     }
@@ -311,6 +314,21 @@ class HomeViewState extends State<HomeView> {
         ttsState = TtsState.stopped;
       });
     });
+  }
+
+  Future _appHistory(String q) async {
+    DateTime now = DateTime.now();
+    List<String> months = ['', 'Jan', 'Feb' 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    String entryTime =
+        "${now.day.toString().padLeft(2, '0')} ${months[now.month]} ${now.year.toString()}, ${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}";
+    Map entry = {"time": entryTime, "query": q};
+    List<Map> appHistory = [...widget.controller.appHistory];
+    appHistory.insert(0, entry);
+    const maxHistory = 20;
+    if (appHistory.length > maxHistory) {
+      appHistory.removeRange((maxHistory - 1), appHistory.length);
+    }
+    await widget.controller.updateAppHistory(appHistory);
   }
 
   Future _getDefaultEngine() async {

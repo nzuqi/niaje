@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:niaje/src/history/history_view.dart';
 import 'package:niaje/src/settings/settings_view.dart';
 import 'package:niaje/widgets/background_wave.dart';
 
@@ -49,10 +50,12 @@ class SliverCustomAppBar extends SliverPersistentHeaderDelegate {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  // IconButton(
-                  //   icon: const Icon(Icons.history, color: Colors.white),
-                  //   onPressed: () {},
-                  // ),
+                  IconButton(
+                    icon: const Icon(Icons.history, color: Colors.white),
+                    onPressed: () {
+                      Navigator.restorablePushNamed(context, HistoryView.routeName);
+                    },
+                  ),
                   IconButton(
                     icon: const Icon(Icons.settings, color: Colors.white),
                     onPressed: () {

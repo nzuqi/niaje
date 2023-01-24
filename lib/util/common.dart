@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
 final logger = Logger();
@@ -17,4 +18,9 @@ Future<Map<String, String>> requestHeaders({String? token}) async {
 extension StringCasingExtension on String {
   String toCapitalized() => length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';
   String toTitleCase() => replaceAll(RegExp(' +'), ' ').split(' ').map((str) => str.toCapitalized()).join(' ');
+}
+
+showAlert(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).clearSnackBars();
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
 }

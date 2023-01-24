@@ -23,7 +23,7 @@ class SettingsViewState extends State<SettingsView> {
           children: [
             PopupMenuButton(
               onSelected: (ThemeMode value) async {
-                widget.controller.updateThemeMode(value);
+                await widget.controller.updateThemeMode(value);
               },
               offset: Offset.fromDirection(1.0),
               tooltip: "",

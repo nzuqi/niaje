@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:niaje/src/history/history_view.dart';
 import 'package:niaje/src/home/home_view.dart';
 import 'package:niaje/themes/dark.dart';
 import 'package:niaje/themes/light.dart';
@@ -70,13 +71,11 @@ class MyApp extends StatelessWidget {
                 switch (routeSettings.name) {
                   case SettingsView.routeName:
                     return SettingsView(controller: settingsController);
-                  // case SampleItemDetailsView.routeName:
-                  // return const SampleItemDetailsView();
-                  // case SampleItemListView.routeName:
-                  //   return const SampleItemListView();
+                  case HistoryView.routeName:
+                    return HistoryView(controller: settingsController);
                   case HomeView.routeName:
                   default:
-                    return const HomeView();
+                    return HomeView(controller: settingsController);
                 }
               },
             );
