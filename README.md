@@ -34,3 +34,4 @@ apps](https://flutter.dev/docs/development/accessibility-and-localization/intern
 - https://rxlabz.github.io/panache_web/#/editor
 - https://pub.dev/packages/flutter_spinkit
 - https://pub.dev/packages/animated_text_kit
+- https://stackoverflow.com/a/70316521/5630225
