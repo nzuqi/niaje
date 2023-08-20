@@ -105,34 +105,34 @@ class SettingsViewState extends State<SettingsView> {
             //   onChanged: (bool value) {},
             // ),
             const SizedBox(height: 20),
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Opacity(
-                    opacity: 0.5,
-                    child: Text(
-                      "Niaje v1.0.1",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12.0,
-                      ),
-                    ),
-                  ),
-                  Opacity(
-                    opacity: 0.5,
-                    child: Text(
-                      "Powered by OpenAPI API",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w300,
-                        fontSize: 10.0,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
+            // const Padding(
+            //   padding: EdgeInsets.all(16.0),
+            //   child: Column(
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: [
+            //       Opacity(
+            //         opacity: 0.5,
+            //         child: Text(
+            //           "Niaje v1.0.1",
+            //           style: TextStyle(
+            //             fontWeight: FontWeight.bold,
+            //             fontSize: 12.0,
+            //           ),
+            //         ),
+            //       ),
+            //       Opacity(
+            //         opacity: 0.5,
+            //         child: Text(
+            //           "Powered by OpenAPI API",
+            //           style: TextStyle(
+            //             fontWeight: FontWeight.w300,
+            //             fontSize: 10.0,
+            //           ),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // )
           ],
         ),
       ),

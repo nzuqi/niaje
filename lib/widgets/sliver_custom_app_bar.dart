@@ -7,10 +7,12 @@ class SliverCustomAppBar extends SliverPersistentHeaderDelegate {
   const SliverCustomAppBar();
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     // var adjustedShrinkOffset = shrinkOffset > minExtent ? minExtent : shrinkOffset;
     // double offset = (minExtent - adjustedShrinkOffset) * 0.5;
-    double topPadding = MediaQuery.of(context).padding.top + 10; // + 16 (Default)
+    double topPadding =
+        MediaQuery.of(context).padding.top + 10; // + 16 (Default)
 
     return Stack(
       children: [
@@ -25,9 +27,9 @@ class SliverCustomAppBar extends SliverPersistentHeaderDelegate {
             // crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
+              const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     "Niaje",
                     style: TextStyle(
@@ -53,13 +55,15 @@ class SliverCustomAppBar extends SliverPersistentHeaderDelegate {
                   IconButton(
                     icon: const Icon(Icons.history, color: Colors.white),
                     onPressed: () {
-                      Navigator.restorablePushNamed(context, HistoryView.routeName);
+                      Navigator.restorablePushNamed(
+                          context, HistoryView.routeName);
                     },
                   ),
                   IconButton(
                     icon: const Icon(Icons.settings, color: Colors.white),
                     onPressed: () {
-                      Navigator.restorablePushNamed(context, SettingsView.routeName);
+                      Navigator.restorablePushNamed(
+                          context, SettingsView.routeName);
                     },
                   ),
                 ],
