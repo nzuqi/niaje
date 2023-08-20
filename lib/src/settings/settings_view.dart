@@ -29,11 +29,11 @@ class SettingsViewState extends State<SettingsView> {
               tooltip: "",
               // initialValue: widget.controller.themeMode,
               itemBuilder: (context) => [
-                PopupMenuItem(
+                const PopupMenuItem(
                   value: ThemeMode.system,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: const <Widget>[
+                    children: <Widget>[
                       Text(
                         "System theme",
                         style: TextStyle(
@@ -43,11 +43,11 @@ class SettingsViewState extends State<SettingsView> {
                     ],
                   ),
                 ),
-                PopupMenuItem(
+                const PopupMenuItem(
                   value: ThemeMode.light,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: const <Widget>[
+                    children: <Widget>[
                       Text(
                         "Light theme",
                         style: TextStyle(
@@ -57,11 +57,11 @@ class SettingsViewState extends State<SettingsView> {
                     ],
                   ),
                 ),
-                PopupMenuItem(
+                const PopupMenuItem(
                   value: ThemeMode.dark,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: const <Widget>[
+                    children: <Widget>[
                       Text(
                         "Dark theme",
                         style: TextStyle(
@@ -105,11 +105,11 @@ class SettingsViewState extends State<SettingsView> {
             //   onChanged: (bool value) {},
             // ),
             const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Opacity(
                     opacity: 0.5,
                     child: Text(

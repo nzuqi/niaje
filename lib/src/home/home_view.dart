@@ -106,7 +106,11 @@ class HomeViewState extends State<HomeView> {
                                   decoration: TextDecoration.underline,
                                   decorationStyle: TextDecorationStyle.dotted,
                                   decorationColor: Colors.red,
-                                  shadows: [Shadow(color: Colors.red, offset: Offset(0, -4))],
+                                  shadows: [
+                                    Shadow(
+                                        color: Colors.red,
+                                        offset: Offset(0, -4))
+                                  ],
                                 ),
                               ),
                               onTap: () async {
@@ -120,12 +124,12 @@ class HomeViewState extends State<HomeView> {
                           : const SizedBox(),
                       const SizedBox(height: 40.0),
                       fetchingResponse
-                          ? SizedBox(
+                          ? const SizedBox(
                               width: double.infinity,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
+                                children: [
                                   SpinKitThreeBounce(
                                     color: Colors.red,
                                     size: 22,
@@ -138,7 +142,10 @@ class HomeViewState extends State<HomeView> {
                               child: DefaultTextStyle(
                                 style: TextStyle(
                                   fontSize: 16.0,
-                                  color: Theme.of(context).buttonTheme.colorScheme?.onSurface,
+                                  color: Theme.of(context)
+                                      .buttonTheme
+                                      .colorScheme
+                                      ?.onSurface,
                                 ),
                                 child: responseStr.isNotEmpty
                                     ? AnimatedTextKit(
@@ -147,7 +154,8 @@ class HomeViewState extends State<HomeView> {
                                         animatedTexts: [
                                           TypewriterAnimatedText(
                                             responseStr,
-                                            speed: const Duration(milliseconds: 50),
+                                            speed: const Duration(
+                                                milliseconds: 50),
                                             cursor: ' _',
                                           ),
                                         ],
@@ -173,8 +181,13 @@ class HomeViewState extends State<HomeView> {
           endRadius: 75,
           glowColor: Colors.red,
           child: FloatingActionButton(
+            backgroundColor: Colors.red,
+            foregroundColor: Colors.white,
             onPressed: toggleRecording,
-            child: Icon(isListening ? Icons.mic : Icons.mic_none, size: 36),
+            child: Icon(
+              isListening ? Icons.mic : Icons.mic_none,
+              size: 36,
+            ),
           ),
         ),
       ),
@@ -244,7 +257,8 @@ class HomeViewState extends State<HomeView> {
     LineSplitter ls = const LineSplitter();
     List<String> strs = ls.convert(responseStr);
     for (String s in strs) {
-      texts.add(TypewriterAnimatedText(s, speed: const Duration(milliseconds: 50), cursor: ' _'));
+      texts.add(TypewriterAnimatedText(s,
+          speed: const Duration(milliseconds: 50), cursor: ' _'));
     }
     return AnimatedTextKit(
       isRepeatingAnimation: false,

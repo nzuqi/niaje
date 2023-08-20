@@ -4,7 +4,11 @@ description: Voice assistant app powered by OpenAPI
 # Prevent accidental publishing to pub.dev.
 publish_to: "none"
 
+<<<<<<< HEAD
 version: 1.0.1+2
+=======
+version: 1.0.4+4
+>>>>>>> 28604e1e34e4f6944df86dd6d11d3365116107c5
 
 environment:
   sdk: ">=2.17.6 <3.0.0"
