@@ -32,11 +32,7 @@ packages:
       sha256: "947bfcf187f74dbc5e146c9eb9c0f10c9f8b30743e341481c1e2ed3ecc18c20c"
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
-    version: "2.9.0"
-=======
     version: "2.11.0"
->>>>>>> 28604e1e34e4f6944df86dd6d11d3365116107c5
   avatar_glow:
     dependency: "direct main"
     description:
@@ -60,11 +56,7 @@ packages:
       sha256: "04a925763edad70e8443c99234dc3328f442e811f1d8fd1a72f1c8ad0f69a605"
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
-    version: "1.2.1"
-=======
     version: "1.3.0"
->>>>>>> 28604e1e34e4f6944df86dd6d11d3365116107c5
   checked_yaml:
     dependency: transitive
     description:
@@ -260,11 +252,7 @@ packages:
       sha256: "6501fbd55da300384b768785b83e5ce66991266cec21af89ab9ae7f5ce1c4cbb"
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
-    version: "0.12.12"
-=======
     version: "0.12.15"
->>>>>>> 28604e1e34e4f6944df86dd6d11d3365116107c5
   material_color_utilities:
     dependency: transitive
     description:
@@ -272,11 +260,7 @@ packages:
       sha256: d92141dc6fe1dad30722f9aa826c7fbc896d021d792f80678280601aff8cf724
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
-    version: "0.1.5"
-=======
     version: "0.2.0"
->>>>>>> 28604e1e34e4f6944df86dd6d11d3365116107c5
   meta:
     dependency: transitive
     description:
@@ -284,11 +268,7 @@ packages:
       sha256: "3c74dbf8763d36539f114c799d8a2d87343b5067e9d796ca22b5eb8437090ee3"
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
-    version: "1.8.0"
-=======
     version: "1.9.1"
->>>>>>> 28604e1e34e4f6944df86dd6d11d3365116107c5
   path:
     dependency: transitive
     description:
@@ -296,11 +276,7 @@ packages:
       sha256: "8829d8a55c13fc0e37127c29fedf290c102f4e40ae94ada574091fe0ff96c917"
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
-    version: "1.8.2"
-=======
     version: "1.8.3"
->>>>>>> 28604e1e34e4f6944df86dd6d11d3365116107c5
   path_provider_linux:
     dependency: transitive
     description:
@@ -449,11 +425,7 @@ packages:
       sha256: dd904f795d4b4f3b870833847c461801f6750a9fa8e61ea5ac53f9422b31f250
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
-    version: "1.9.0"
-=======
     version: "1.9.1"
->>>>>>> 28604e1e34e4f6944df86dd6d11d3365116107c5
   speech_to_text:
     dependency: "direct main"
     description:
@@ -501,11 +473,7 @@ packages:
       sha256: "556692adab6cfa87322a115640c11f13cb77b3f076ddcc5d6ae3c20242bedcde"
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
-    version: "1.1.1"
-=======
     version: "1.2.0"
->>>>>>> 28604e1e34e4f6944df86dd6d11d3365116107c5
   term_glyph:
     dependency: transitive
     description:
@@ -521,11 +489,7 @@ packages:
       sha256: eb6ac1540b26de412b3403a163d919ba86f6a973fe6cc50ae3541b80092fdcfb
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
-    version: "0.4.12"
-=======
     version: "0.5.1"
->>>>>>> 28604e1e34e4f6944df86dd6d11d3365116107c5
   typed_data:
     dependency: transitive
     description:
