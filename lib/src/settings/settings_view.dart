@@ -123,7 +123,7 @@ class SettingsViewState extends State<SettingsView> {
             //       Opacity(
             //         opacity: 0.5,
             //         child: Text(
-            //           "Powered by OpenAPI API",
+            //           "Powered by Gemini API",
             //           style: TextStyle(
             //             fontWeight: FontWeight.w300,
             //             fontSize: 10.0,

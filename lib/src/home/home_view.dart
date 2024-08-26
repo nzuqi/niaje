@@ -2,12 +2,11 @@ import 'dart:convert';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:http/http.dart';
 import 'package:niaje/api/speech_api.dart';
 import 'package:niaje/src/settings/settings_controller.dart';
-import 'package:niaje/util/app_url.dart';
 import 'package:niaje/widgets/sliver_custom_app_bar.dart';
 import 'package:niaje/util/common.dart';
 import 'dart:io' show Platform;
@@ -16,7 +15,8 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 class HomeView extends StatefulWidget {
   final SettingsController controller;
   final String? query;
-  const HomeView({Key? key, required this.controller, this.query}) : super(key: key);
+  const HomeView({Key? key, required this.controller, this.query})
+      : super(key: key);
   static const routeName = '/';
 
   @override
@@ -43,6 +43,8 @@ class HomeViewState extends State<HomeView> {
   bool isCurrentLanguageInstalled = false;
 
   TtsState ttsState = TtsState.stopped;
+
+  final gemini = Gemini.instance;
 
   get isPlaying => ttsState == TtsState.playing;
   get isStopped => ttsState == TtsState.stopped;
@@ -206,7 +208,7 @@ class HomeViewState extends State<HomeView> {
             Future.delayed(const Duration(seconds: 1), () async {
               logger.i(text);
               // Make request to ChatGPT here, and read out loud API response
-              await openAiSearch(text);
+              await geminiSearch(text);
             });
           }
         },
@@ -228,28 +230,22 @@ class HomeViewState extends State<HomeView> {
     }
   }
 
-  Future openAiSearch(String q) async {
+  Future geminiSearch(String q) async {
     fetchingResponse = true;
     setState(() {});
-    final Map<String, dynamic> data = {"q": q};
-    var headers = await requestHeaders();
-    Response response = await post(
-      Uri.parse(AppUrl.search),
-      body: json.encode(data),
-      headers: headers,
-    );
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> responseData = json.decode(response.body);
-      if (responseData['status'] == 1) {
-        logger.v(responseData['data']);
-        responseStr = responseData['data'] ?? '';
-        setState(() {});
-        await _appHistory(q.toCapitalized());
-        _speak(msg: responseData['data']);
-      }
-    }
-    fetchingResponse = false;
-    setState(() {});
+    gemini.text(q).then((value) async {
+      logger.e(value?.output);
+      // logger.e(value?.content?.parts?.last.text);
+      responseStr = value?.output ?? '';
+      setState(() {});
+      await _appHistory(q.toCapitalized());
+      _speak(msg: responseStr);
+      fetchingResponse = false;
+      setState(() {});
+    }).catchError((e) {
+      fetchingResponse = false;
+      setState(() {});
+    });
   }
 
   AnimatedTextKit aiText() {
@@ -336,7 +332,20 @@ class HomeViewState extends State<HomeView> {
 
   Future _appHistory(String q) async {
     DateTime now = DateTime.now();
-    List<String> months = ['', 'Jan', 'Feb' 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    List<String> months = [
+      '',
+      'Jan',
+      'Feb' 'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
     String entryTime =
         "${now.day.toString().padLeft(2, '0')} ${months[now.month]} ${now.year.toString()}, ${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}";
     Map entry = {"time": entryTime, "query": q};
@@ -407,7 +416,7 @@ class HomeViewState extends State<HomeView> {
       skipHistory = true;
       setState(() {});
       _stop();
-      await openAiSearch(text);
+      await geminiSearch(text);
     }
   }
 }

@@ -31,7 +31,8 @@ class HistoryViewState extends State<HistoryView> {
                   onPressed: () {
                     widget.controller.clearAppHistory();
                     history.clear();
-                    showAlert(context, "You've successfully cleared your history.");
+                    showAlert(
+                        context, "You've successfully cleared your history.");
                     setState(() {});
                   },
                   icon: const Icon(Icons.delete_sweep),
@@ -51,7 +52,8 @@ class HistoryViewState extends State<HistoryView> {
                     history.removeAt(index);
                     await widget.controller.updateAppHistory([...history]);
                     // ignore: use_build_context_synchronously
-                    showAlert(context, "You've successfully remove the item from your history.");
+                    showAlert(context,
+                        "You've successfully remove the item from your history.");
                     setState(() {});
                   },
                   background: Container(
@@ -104,13 +106,13 @@ class HistoryViewState extends State<HistoryView> {
                 );
               },
             )
-          : SizedBox.expand(
+          : const SizedBox.expand(
               child: Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: EdgeInsets.all(15.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Text(
                       "Nothing to show!",
                       style: TextStyle(fontSize: 18.0),

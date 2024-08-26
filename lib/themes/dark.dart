@@ -21,23 +21,22 @@ final ThemeData dark = ThemeData(
   // accentColor: const Color(0xfff44336),
   canvasColor: const Color(0xff303030),
   scaffoldBackgroundColor: const Color(0xff303030),
-  bottomAppBarColor: const Color(0xff424242),
+  bottomAppBarTheme: const BottomAppBarTheme(
+    color: Color(0xff424242),
+  ),
   cardColor: const Color(0xff424242),
   dividerColor: const Color(0x1fffffff),
   highlightColor: const Color(0x40cccccc),
   splashColor: const Color(0x40cccccc),
   unselectedWidgetColor: const Color(0xb3ffffff),
   disabledColor: const Color(0x62ffffff),
-  toggleableActiveColor: const Color(0xfff44336),
+  // toggleableActiveColor: const Color(0xfff44336),
   secondaryHeaderColor: const Color(0xff616161),
-  // textSelectionColor: const Color(0xfff44336),
-  // cursorColor: const Color(0xfff44336),
-  // textSelectionHandleColor: const Color(0xfff44336),
-  backgroundColor: const Color(0xff616161),
+  // backgroundColor: const Color(0xff616161),
   dialogBackgroundColor: const Color(0xff424242),
   indicatorColor: const Color(0xfff44336),
   hintColor: const Color(0x80ffffff),
-  errorColor: const Color(0xffd32f2f),
+  // errorColor: const Color(0xffd32f2f),
   buttonTheme: const ButtonThemeData(
     textTheme: ButtonTextTheme.normal,
     minWidth: 88,
@@ -60,9 +59,7 @@ final ThemeData dark = ThemeData(
     hoverColor: Color(0x0affffff),
     colorScheme: ColorScheme(
       primary: Color(0xff673ab7),
-      primaryVariant: Color(0xff000000),
       secondary: Color(0xff64ffda),
-      secondaryVariant: Color(0xff00bfa5),
       surface: Color(0xff424242),
       background: Color(0xff616161),
       error: Color(0xffd32f2f),
@@ -75,79 +72,79 @@ final ThemeData dark = ThemeData(
     ),
   ),
   textTheme: const TextTheme(
-    headline1: TextStyle(
+    displayLarge: TextStyle(
       color: Color(0xb3ffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    headline2: TextStyle(
+    displayMedium: TextStyle(
       color: Color(0xb3ffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    headline3: TextStyle(
+    displaySmall: TextStyle(
       color: Color(0xb3ffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    headline4: TextStyle(
+    headlineMedium: TextStyle(
       color: Color(0xb3ffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    headline5: TextStyle(
+    headlineSmall: TextStyle(
       color: Color(0xffffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    headline6: TextStyle(
+    titleLarge: TextStyle(
       color: Color(0xffffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    subtitle1: TextStyle(
+    titleMedium: TextStyle(
       color: Color(0xffffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    bodyText1: TextStyle(
+    bodyLarge: TextStyle(
       color: Color(0xffffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    bodyText2: TextStyle(
+    bodyMedium: TextStyle(
       color: Color(0xffffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    caption: TextStyle(
+    bodySmall: TextStyle(
       color: Color(0xb3ffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    button: TextStyle(
+    labelLarge: TextStyle(
       color: Color(0xffffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    subtitle2: TextStyle(
+    titleSmall: TextStyle(
       color: Color(0xffffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    overline: TextStyle(
+    labelSmall: TextStyle(
       color: Color(0xffffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
@@ -155,79 +152,79 @@ final ThemeData dark = ThemeData(
     ),
   ),
   primaryTextTheme: const TextTheme(
-    headline1: TextStyle(
+    displayLarge: TextStyle(
       color: Color(0xb3ffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    headline2: TextStyle(
+    displayMedium: TextStyle(
       color: Color(0xb3ffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    headline3: TextStyle(
+    displaySmall: TextStyle(
       color: Color(0xb3ffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    headline4: TextStyle(
+    headlineMedium: TextStyle(
       color: Color(0xb3ffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    headline5: TextStyle(
+    headlineSmall: TextStyle(
       color: Color(0xffffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    headline6: TextStyle(
+    titleLarge: TextStyle(
       color: Color(0xffffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    subtitle1: TextStyle(
+    titleMedium: TextStyle(
       color: Color(0xffffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    bodyText1: TextStyle(
+    bodyLarge: TextStyle(
       color: Color(0xffffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    bodyText2: TextStyle(
+    bodyMedium: TextStyle(
       color: Color(0xffffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    caption: TextStyle(
+    bodySmall: TextStyle(
       color: Color(0xb3ffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    button: TextStyle(
+    labelLarge: TextStyle(
       color: Color(0xffffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    subtitle2: TextStyle(
+    titleSmall: TextStyle(
       color: Color(0xffffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal,
     ),
-    overline: TextStyle(
+    labelSmall: TextStyle(
       color: Color(0xffffffff),
       fontSize: null,
       fontWeight: FontWeight.w400,

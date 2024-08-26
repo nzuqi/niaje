@@ -48,10 +48,10 @@ Widget plainButton({
   return ElevatedButton(
     onPressed: (!processing && !disabled) ? onPressed : null,
     style: ButtonStyle(
-      padding: MaterialStateProperty.all(
+      padding: WidgetStateProperty.all(
         const EdgeInsets.fromLTRB(20, 12, 20, 12),
       ),
-      backgroundColor: MaterialStateProperty.all(
+      backgroundColor: WidgetStateProperty.all(
         (!processing && !disabled) ? Colors.cyan : Colors.cyan[200],
       ),
     ),
@@ -103,7 +103,9 @@ Widget outlineButton({
         borderRadius: BorderRadius.circular(18.0),
         side: BorderSide(
           width: 2.0,
-          color: (!processing && !disabled) ? Colors.red : Colors.red[200] as Color,
+          color: (!processing && !disabled)
+              ? Colors.red
+              : Colors.red[200] as Color,
         ),
       ),
     ),
@@ -144,7 +146,7 @@ Widget textButton({
   return TextButton(
     onPressed: (!processing && !disabled) ? onPressed : null,
     style: ButtonStyle(
-      padding: MaterialStateProperty.all(
+      padding: WidgetStateProperty.all(
         const EdgeInsets.fromLTRB(20, 12, 20, 12),
       ),
     ),
@@ -156,7 +158,8 @@ Widget textButton({
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
-              color: (!processing && !disabled) ? Colors.cyan : Colors.cyan[200],
+              color:
+                  (!processing && !disabled) ? Colors.cyan : Colors.cyan[200],
             ),
           ),
           processing ? const SizedBox(width: 10) : const SizedBox(),
@@ -166,7 +169,9 @@ Widget textButton({
                   width: 20,
                   child: CircularProgressIndicator(
                     strokeWidth: 2.0,
-                    color: (!processing && !disabled) ? Colors.cyan : Colors.cyan[200],
+                    color: (!processing && !disabled)
+                        ? Colors.cyan
+                        : Colors.cyan[200],
                   ),
                 )
               : const SizedBox()

@@ -1,6 +1,6 @@
 # niaje
 
-Voice assistant app powered by OpenAI API
+Voice assistant app powered by Gemini API
 
 ## run app in dev
 
@@ -35,3 +35,5 @@ apps](https://flutter.dev/docs/development/accessibility-and-localization/intern
 - https://pub.dev/packages/flutter_spinkit
 - https://pub.dev/packages/animated_text_kit
 - https://stackoverflow.com/a/70316521/5630225
+- https://dribbble.com/shots/14565620-Home-assistant-app-UI-Map
+- https://pub.dev/packages/flutter_gemini

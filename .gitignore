@@ -49,3 +49,6 @@ app.*.map.json
 # Config files
 /assets/config.prod.json
 /assets/config.dev.json
+
+# env
+.env
