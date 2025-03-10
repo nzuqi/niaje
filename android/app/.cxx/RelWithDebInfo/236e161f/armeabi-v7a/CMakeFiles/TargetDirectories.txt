@@ -1,0 +1,2 @@
+/Users/martins/repos/my/niaje/android/app/.cxx/RelWithDebInfo/236e161f/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/martins/repos/my/niaje/android/app/.cxx/RelWithDebInfo/236e161f/armeabi-v7a/CMakeFiles/rebuild_cache.dir

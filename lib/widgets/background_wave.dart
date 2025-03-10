@@ -19,8 +19,8 @@ class BackgroundWave extends StatelessWidget {
               decoration: BoxDecoration(
                 gradient: RadialGradient(
                   colors: [
-                    Theme.of(context).primaryColor.withOpacity(1),
-                    Theme.of(context).primaryColor.withOpacity(0.5),
+                    Theme.of(context).primaryColor.withValues(alpha: 1),
+                    Theme.of(context).primaryColor.withValues(alpha: 0.5),
                   ],
                   radius: 1.8,
                 ),
@@ -36,8 +36,8 @@ class BackgroundWave extends StatelessWidget {
                     decoration: BoxDecoration(
                       gradient: RadialGradient(
                         colors: [
-                          Theme.of(context).primaryColor.withOpacity(1),
-                          Theme.of(context).primaryColor.withOpacity(0.8),
+                          Theme.of(context).primaryColor.withValues(alpha: 1),
+                          Theme.of(context).primaryColor.withValues(alpha: 0.8),
                         ],
                         radius: 1.8,
                       ),
@@ -66,7 +66,8 @@ class BackgroundWaveClipper extends CustomClipper<Path> {
     final controlPoint = Offset(size.width * 0.4, size.height);
     final endPoint = Offset(size.width, minSize);
 
-    path.quadraticBezierTo(controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy);
+    path.quadraticBezierTo(
+        controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy);
 
     path.lineTo(size.width, 0.0);
     path.close();
@@ -91,7 +92,8 @@ class BackgroundWaveClipperInner extends CustomClipper<Path> {
     final controlPoint = Offset(size.width * 0.4, size.height);
     final endPoint = Offset(size.width, minSize);
 
-    path.quadraticBezierTo(controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy);
+    path.quadraticBezierTo(
+        controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy);
 
     path.lineTo(size.width, 0.0);
     path.close();
@@ -99,5 +101,6 @@ class BackgroundWaveClipperInner extends CustomClipper<Path> {
   }
 
   @override
-  bool shouldReclip(BackgroundWaveClipperInner oldClipper) => oldClipper != this;
+  bool shouldReclip(BackgroundWaveClipperInner oldClipper) =>
+      oldClipper != this;
 }

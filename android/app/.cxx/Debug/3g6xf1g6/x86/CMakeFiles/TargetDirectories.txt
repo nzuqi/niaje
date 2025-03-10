@@ -1,0 +1,2 @@
+/Users/martins/repos/my/niaje/android/app/.cxx/Debug/3g6xf1g6/x86/CMakeFiles/edit_cache.dir
+/Users/martins/repos/my/niaje/android/app/.cxx/Debug/3g6xf1g6/x86/CMakeFiles/rebuild_cache.dir

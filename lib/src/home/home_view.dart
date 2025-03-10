@@ -233,10 +233,10 @@ class HomeViewState extends State<HomeView> {
   Future geminiSearch(String q) async {
     fetchingResponse = true;
     setState(() {});
-    gemini.text(q).then((value) async {
+    gemini.prompt(parts: [Part.text(q)]).then((value) async {
       logger.e(value?.output);
       // logger.e(value?.content?.parts?.last.text);
-      responseStr = value?.output ?? '';
+      responseStr = (value?.output ?? '').replaceAll('*', '');
       setState(() {});
       await _appHistory(q.toCapitalized());
       _speak(msg: responseStr);
@@ -280,14 +280,6 @@ class HomeViewState extends State<HomeView> {
         ttsState = TtsState.playing;
       });
     });
-
-    if (isAndroid) {
-      flutterTts.setInitHandler(() {
-        setState(() {
-          logger.d("TTS Initialized");
-        });
-      });
-    }
 
     flutterTts.setCompletionHandler(() {
       setState(() {
