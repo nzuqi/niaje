@@ -4,7 +4,7 @@ description: Voice assistant app powered by Gemini API
 # Prevent accidental publishing to pub.dev.
 publish_to: "none"
 
-version: 2.0.3+13
+version: 2.0.5+15
 
 environment:
   sdk: ">=3.3.4 <4.0.0"
